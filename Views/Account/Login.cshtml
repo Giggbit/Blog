@@ -1,0 +1,48 @@
+﻿@model Blog.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Авторизация";
+}
+
+<div class="row justify-content-center g-5 py-5">
+    <div class="mt-5"></div>
+    <div class="mt-5"></div>
+
+    <div class="col-md-4">
+        <h2 class="mb-4">Авторизация</h2>
+
+        <form asp-action="Login" asp-controller="Account" method="post" asp-route-return-url="@Model.ReturnUrl">
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col d-flex justify-content-center">
+                    <div class="form-check">
+                        <input asp-for="RememberMe" class="form-check-input" />
+                        <label asp-for="RememberMe">Remember me</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <a asp-controller="Account" asp-action="ForgotPassword">Forgot password</a>
+                </div>
+            </div>
+
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
